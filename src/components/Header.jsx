@@ -18,7 +18,7 @@ function Header(){
             <Nav.Link href="/test">Test</Nav.Link>
 
             {/* 새로고침 없이 자연스런 화면 이동 */}
-            <Link to={'/테스트'}>ttt</Link> 
+            <Link to={'/테스트'}>test</Link> 
           </Nav>
 
         </Container>
