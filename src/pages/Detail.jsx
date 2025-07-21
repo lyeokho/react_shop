@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom"
+import TabContent from "../components/TabContent";
 
 function Detail({fruit}){
   const {id}=useParams();  //주소 값을 꺼내준다
@@ -7,6 +9,7 @@ function Detail({fruit}){
   const[num2, setNum2]=useState(0);
   const selectedFruit=fruit[id];
   const[alert, setAlert]=useState(true);
+  const[tabNumber, setTabNumber]=useState(0);
 
   //useEffect는 html이 전부 다 렌더링이 완료된 후 실행된다.
   useEffect(()=>{
@@ -63,9 +66,32 @@ function Detail({fruit}){
           <p>{fruit[id].price}</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
-
       </div>
 
+      <Nav className="mt-5" variant="tabs" justify defaultActiveKey='link-0'>
+        
+        <Nav.Item>
+        <Nav.Link eventkey='link-0' onClick={()=>{
+          setTabNumber(0);
+        }}>상세정보</Nav.Link>
+        </Nav.Item>
+
+        <Nav.Item>
+        <Nav.Link eventkey='link-1' onClick={()=>{
+          setTabNumber(1);
+        }}>리뷰</Nav.Link>
+        </Nav.Item>
+
+        <Nav.Item>
+        <Nav.Link eventkey='link-2' onClick={()=>{
+          setTabNumber(2);
+        }}>반품,교환</Nav.Link>
+        </Nav.Item>
+
+
+      </Nav>
+
+        <TabContent tabNumber={tabNumber}/>
     </div>
   )
 }

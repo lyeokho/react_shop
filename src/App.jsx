@@ -9,6 +9,7 @@ import Detail from './pages/Detail'
 import About from './pages/About'
 import styled from 'styled-components'
 import axios from 'axios'
+import Cart from './pages/Cart'
 
 
 // const 컴포넌트 이름 지정= styled.태그명 `css속성`
@@ -58,6 +59,7 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage fruit={fruit}/>} />
         <Route path='/detail/:id' element={<Detail fruit={fruit}/>} />
+        <Route path='/cart' element={<Cart/>}/>
         <Route path='/test' element={<h1>테스트페이지</h1>} /> 
         {/* 없는 페이지를 접속할때 안내문구 */}
         <Route path='*' element={<h1>존재하지 않는 페이지입니다.🤷‍♀️</h1>} />  
