@@ -1,19 +1,25 @@
 
 import Card from "../components/Card"
 import bg from "../bg.jpg"
+import { useState } from "react";
 
 
 
 function MainPage({fruit}){
+   const[fruitCount, setFruitCount]=useState(3);
+    
+   const visibleFruit=fruit.slice(0, fruitCount);
+   console.log(visibleFruit)
+
   return(
 
-    <>
-<div className='main-bg' style={{ backgroundImage: 'url(' + bg + ')' }}> </div>
+<>
+<div className='main-bg ' style={{ backgroundImage: 'url(' + bg + ')', height:'300px' }}> </div>
 
   <div className='container'>
     <div className='row'>
     {
-      fruit.map((data,i)=>{
+      visibleFruit.map((data,i)=>{
         return(
           <Card data={data} key={i}/>
         )
@@ -24,7 +30,15 @@ function MainPage({fruit}){
     </div>
   </div>
 
-   
+    {
+    fruitCount>fruit.lenth?
+    <div className="alert alert-danger">더이상 상품이 없습니다.</div>
+    :
+    <button onClick={()=>{
+      setFruitCount(fruitCount+3);
+    }}>3개 더 보기</button>
+    }
+  
 </>
 
   )
