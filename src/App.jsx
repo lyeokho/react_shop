@@ -3,13 +3,13 @@ import style from './App.module.css'
 import data from './mokData'  //불러올때 필수
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import MainPage from './pages/mainpage'
 import Header from './components/Header'
 import Detail from './pages/Detail'
 import About from './pages/About'
 import styled from 'styled-components'
 import axios from 'axios'
 import Cart from './pages/Cart'
+import MainPage from './pages/MainPage'
 
 
 // const 컴포넌트 이름 지정= styled.태그명 `css속성`
