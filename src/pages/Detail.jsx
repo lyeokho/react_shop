@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import TabContent from "../components/TabContent";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/cartSlice";
+import { setWatched } from "../redux/watchedSlice";
 
 function Detail({fruit}){
   const {id}=useParams();  //주소 값을 꺼내준다
@@ -25,6 +26,26 @@ function Detail({fruit}){
     clearTimeout(timer)
   }
   },[]); 
+
+  useEffect(()=>{      //방금 들어온 상품의 id를 로컬스토리지에 추가(상품을 보면 중복이 되므로 set사용)
+    let watched=localStorage.getItem('watched');
+    watched=JSON.parse(watched)
+    if(watched.length===3 && !watched.includes(id))     //본 목록 4개면 1개 빼기  //includes 해당 배열값이 있으면 true 없으면 false
+      watched.pop();                                                          //이미 들어있으면 안지워도 되고 없을때만 삭제한다.
+      
+    watched=[id, ...watched]
+    
+    watched=new Set(watched)    //set은 배열이 아니기 때문에 중복 제거 후 다시 배열로 변환 해야한다
+    watched=Array.from(watched)   //Array사용
+
+    localStorage.setItem('watched', JSON.stringify(watched));
+    dispatch(setWatched(watched))
+  
+  })
+
+
+
+
   //의존성 배열-변경 감지된 state, props설정하는거에따라
   //실행여부가 결정 됨, 의존성 배열에 빈배열을 넣으면 마운트 시 한번만 실행됨
   

@@ -1,15 +1,15 @@
 
 import style from './App.module.css'
-import data from './mokData'  //불러올때 필수
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import MainPage from './pages/mainpage'
 import Header from './components/Header'
 import Detail from './pages/Detail'
 import About from './pages/About'
 import styled from 'styled-components'
 import axios from 'axios'
 import Cart from './pages/Cart'
-import MainPage from './pages/MainPage'
+import WatchedProduct from './components/WatchedProduct'
 
 
 // const 컴포넌트 이름 지정= styled.태그명 `css속성`
@@ -25,7 +25,7 @@ height:200px;
 `
 
 const Div=styled.div `
-padding:20px;
+padding:20px;git
 background:skyblue; 
 `
 
@@ -43,6 +43,10 @@ function App() {
             console.log(error)
           })
   },[])  
+
+  useEffect(()=>{            //최근 본 상품 목ㅁ록 구현
+    localStorage.setItem('watched', JSON.stringify([]));
+  }, [])
   
   return (
 
@@ -55,7 +59,7 @@ function App() {
       </Div> */}
 
       <Header />  
-    
+      <WatchedProduct fruit={fruit}/>
       <Routes>
         <Route path='/' element={<MainPage fruit={fruit}/>} />
         <Route path='/detail/:id' element={<Detail fruit={fruit}/>} />
